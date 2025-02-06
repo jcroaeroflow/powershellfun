@@ -1,18 +1,18 @@
-# Get Monitor Information
+#Get Monitor Information
 $MonitorInfo = Get-WmiObject WmiMonitorID -Namespace root\wmi | 
 Select-Object @{l="Manufacturer";e={[System.Text.Encoding]::ASCII.GetString($_.ManufacturerName)}},
 @{l="Model";e={[System.Text.Encoding]::ASCII.GetString($_.UserFriendlyName)}},
 @{l="SerialNumber";e={[System.Text.Encoding]::ASCII.GetString($_.SerialNumberID)}}
 
-# Get Computer Make & Model
+#Get Computer Make & Model
 $ComputerInfo = Get-WmiObject Win32_ComputerSystem | 
 Select-Object Manufacturer, Model
 
-# Get Serial Number
+#Get Serial Number
 $SerialNumber = Get-WmiObject Win32_BIOS | 
 Select-Object SerialNumber
 
-# Display Results
+#Display Results
 Write-Output "=== Computer Information ==="
 $ComputerInfo
 Write-Output "Serial Number: $($SerialNumber.SerialNumber)"
